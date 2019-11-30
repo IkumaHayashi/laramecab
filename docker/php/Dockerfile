@@ -46,12 +46,6 @@ RUN set -eux && \
   make && \
   make install && \
   echo 'extension=mecab.so' > /usr/local/etc/php/conf.d/docker-php-ext-mecab.ini && \
-  #お片付け
-  apk del .build-dependencies && \
-  rm -rf \
-    mecab-0.996* \
-    mecab-ipadic-2.7.0-20070801* \
-    php-mecab && \
   #OSの設定
   cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
   echo ${TZ} > /etc/timezone && \
@@ -62,4 +56,10 @@ RUN set -eux && \
   mkdir $PSYSH_DIR && wget $PHP_MANUAL_URL -P $PSYSH_DIR && \
   curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
   composer config -g repos.packagist composer https://packagist.jp && \
-  composer global require hirak/prestissimo
+  composer global require hirak/prestissimo && \
+  #お片付け
+  apk del .build-dependencies && \
+  rm -rf \
+    mecab-0.996* \
+    mecab-ipadic-2.7.0-20070801* \
+    php-mecab
