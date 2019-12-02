@@ -20,7 +20,8 @@ RUN set -eux && \
     g++ \
     make \
     tzdata \
-    git \
+    git && \
+  apk add --update --no-cache \
     icu-dev \
     libzip-dev && \
   #Mecab,ipadic, php-mecabのインストール
@@ -58,7 +59,7 @@ RUN set -eux && \
   composer config -g repos.packagist composer https://packagist.jp && \
   composer global require hirak/prestissimo && \
   #お片付け
-  apk del .build-dependencies && \
+  #apk del .build-dependencies && \
   rm -rf \
     mecab-0.996* \
     mecab-ipadic-2.7.0-20070801* \
